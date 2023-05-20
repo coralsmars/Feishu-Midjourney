@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -40,6 +41,7 @@ func MidjourneyBot(c *gin.Context) {
 	}
 
 	if err != nil {
+		fmt.Println("response err", err.Error())
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}

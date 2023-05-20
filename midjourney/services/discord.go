@@ -3,6 +3,7 @@ package services
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	config "midjourney/initialization"
@@ -194,10 +195,12 @@ func request(params interface{}, url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	if response.Status == "204 No Content" {
+		return nil, errors.New("204 No Content")
+	}
+
 	defer response.Body.Close()
 	bod, respErr := ioutil.ReadAll(response.Body)
-	fmt.Println("response bod:", string(bod))
-	fmt.Println("response respErr:", respErr)
-	fmt.Println("response: Status", response.Status)
+	fmt.Println("response ", string(bod), response.Status, respErr)
 	return bod, respErr
 }
