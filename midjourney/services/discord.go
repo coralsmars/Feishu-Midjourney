@@ -195,12 +195,12 @@ func request(params interface{}, url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if response.Status == "204 No Content" {
-		return nil, errors.New("204 No Content")
-	}
 
 	defer response.Body.Close()
 	bod, respErr := ioutil.ReadAll(response.Body)
 	fmt.Println("response ", string(bod), response.Status, respErr)
+	if response.Status == "204 No Content" {
+		return nil, errors.New("204 No Content")
+	}
 	return bod, respErr
 }
