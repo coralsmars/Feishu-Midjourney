@@ -196,6 +196,8 @@ func request(params interface{}, url string) ([]byte, error) {
 	}
 	defer response.Body.Close()
 	bod, respErr := ioutil.ReadAll(response.Body)
-	fmt.Println("response:", string(bod), respErr, response.Status, url)
+	fmt.Println("response bod:", string(bod))
+	fmt.Println("response respErr:", respErr)
+	fmt.Println("response: Status", response.Status)
 	return bod, respErr
 }
