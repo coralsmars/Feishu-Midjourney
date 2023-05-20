@@ -31,6 +31,7 @@ const (
 )
 
 func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
+	pp.Println(m.Content)
 	// 过滤频道
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
 		return
@@ -59,6 +60,7 @@ func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
 }
 
 func DiscordMsgUpdate(s *discord.Session, m *discord.MessageUpdate) {
+	pp.Println(m.Content)
 	// 过滤频道
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
 		return
