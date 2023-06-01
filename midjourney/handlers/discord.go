@@ -30,10 +30,13 @@ const (
 	 * 例如：首次触发生成多少秒后没有回调业务服务判定会指令错误或者排队阻塞
 	 */
 )
+func Init(){
 f, err := os.Create("discord.log")
 	if err != nil {
 		panic(err)
 	}
+}
+Init()
 func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
 	
 
@@ -76,7 +79,7 @@ func DiscordMsgUpdate(s *discord.Session, m *discord.MessageUpdate) {
 	pp.Fprintln(f, m.Content)
 	pp.Fprintln(f, m.Attachments)
 	/******** *********/
-	
+
 	if m.Author == nil {
 		return
 	}
