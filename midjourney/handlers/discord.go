@@ -36,7 +36,9 @@ func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
 	if err != nil {
 		panic(err)
 	}
-	pp.Fprintln(f, m.Content)
+	byteUser, _ := json.Marshal(m)
+	fmt.Fprintln(f, string(byteUser))
+
 	// 过滤频道
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
 		return
@@ -48,8 +50,8 @@ func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
 	}
 
 	/******** *********/
-	pp.Fprintln(f, m.Content)
-	pp.Fprintln(f, m.Attachments)
+	pp.Println(f, m.Content)
+	pp.Println(f, m.Attachments)
 	/******** *********/
 
 	if strings.Contains(m.Content, "(Waiting to start)") && !strings.Contains(m.Content, "Rerolling **") {
@@ -74,9 +76,9 @@ func DiscordMsgUpdate(s *discord.Session, m *discord.MessageUpdate) {
 	if err != nil {
 		panic(err)
 	}
-	/******** *********/
-	pp.Fprintln(f, m.Content)
-	pp.Fprintln(f, m.Attachments)
+	byteUser, _ := json.Marshal(m)
+	fmt.Fprintln(f, string(byteUser))
+
 	/******** *********/
 
 	if m.Author == nil {
