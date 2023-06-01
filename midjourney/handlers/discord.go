@@ -30,16 +30,12 @@ const (
 	 * 例如：首次触发生成多少秒后没有回调业务服务判定会指令错误或者排队阻塞
 	 */
 )
-func Init(){
-f, err := os.Create("discord.log")
+
+func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
+	f, err := os.OpenFile("discord.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		panic(err)
 	}
-}
-Init()
-func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
-	
-
 	pp.Fprintln(f, m.Content)
 	// 过滤频道
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
@@ -74,7 +70,10 @@ func DiscordMsgUpdate(s *discord.Session, m *discord.MessageUpdate) {
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
 		return
 	}
-	
+	f, err := os.OpenFile("discord.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
+		panic(err)
+	}
 	/******** *********/
 	pp.Fprintln(f, m.Content)
 	pp.Fprintln(f, m.Attachments)
