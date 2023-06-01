@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"midjourney/initialization"
 	"net/http"
+	"os"
 	"strings"
 
 	discord "github.com/bwmarrin/discordgo"
@@ -29,9 +30,14 @@ const (
 	 * 例如：首次触发生成多少秒后没有回调业务服务判定会指令错误或者排队阻塞
 	 */
 )
-
+f, err := os.Create("discord.log")
+	if err != nil {
+		panic(err)
+	}
 func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
-	pp.Println(m.Content)
+	
+
+	pp.Fprintln(f, m.Content)
 	// 过滤频道
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
 		return
@@ -43,8 +49,8 @@ func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
 	}
 
 	/******** *********/
-	pp.Println(m.Content)
-	pp.Println(m.Attachments)
+	pp.Fprintln(f, m.Content)
+	pp.Fprintln(f, m.Attachments)
 	/******** *********/
 
 	if strings.Contains(m.Content, "(Waiting to start)") && !strings.Contains(m.Content, "Rerolling **") {
@@ -60,11 +66,17 @@ func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
 }
 
 func DiscordMsgUpdate(s *discord.Session, m *discord.MessageUpdate) {
+
 	// 过滤频道
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
 		return
 	}
-
+	
+	/******** *********/
+	pp.Fprintln(f, m.Content)
+	pp.Fprintln(f, m.Attachments)
+	/******** *********/
+	
 	if m.Author == nil {
 		return
 	}
