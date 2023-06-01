@@ -37,8 +37,9 @@ func DiscordMsgCreate(s *discord.Session, m *discord.MessageCreate) {
 		panic(err)
 	}
 	byteUser, _ := json.Marshal(m)
+	fmt.Fprintln(f, "=====DiscordMsgCreate=======")
 	fmt.Fprintln(f, string(byteUser))
-
+	fmt.Fprintln(f, "=====DiscordMsgCreate END =======")
 	// 过滤频道
 	if m.ChannelID != initialization.GetConfig().DISCORD_CHANNEL_ID {
 		return
@@ -77,7 +78,9 @@ func DiscordMsgUpdate(s *discord.Session, m *discord.MessageUpdate) {
 		panic(err)
 	}
 	byteUser, _ := json.Marshal(m)
+	fmt.Fprintln(f, "=====DiscordMsgUpdate=======")
 	fmt.Fprintln(f, string(byteUser))
+	fmt.Fprintln(f, "=====DiscordMsgUpdate END =======")
 
 	/******** *********/
 
