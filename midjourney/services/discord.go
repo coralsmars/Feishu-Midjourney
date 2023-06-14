@@ -244,7 +244,7 @@ func request(params interface{}, url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("%s", string(requestData))
+	//fmt.Printf("%s", string(requestData))
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(requestData))
 	if err != nil {
 		return nil, err
@@ -259,6 +259,6 @@ func request(params interface{}, url string) ([]byte, error) {
 
 	defer response.Body.Close()
 	bod, respErr := ioutil.ReadAll(response.Body)
-	fmt.Println("response ", string(bod), response.Status, respErr)
+	//fmt.Println("response ", string(bod), response.Status, respErr)
 	return bod, respErr
 }
