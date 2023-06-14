@@ -184,7 +184,6 @@ func ImageBlend(uploadNames []string) error {
 			Required:    true,
 		}
 		options[i] = option
-
 		doption := DSOption{
 			Type:  11,
 			Name:  "image" + strconv.Itoa(i),
