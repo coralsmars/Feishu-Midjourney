@@ -165,7 +165,7 @@ func Describe(uploadName string) error {
 }
 
 func ImageBlend(uploadNames []string) error {
-
+	fmt.Println("ImageBlend uploadNames: ", string(uploadNames))
 	attachments := make([]ReqCommandAttachments, len(uploadNames))
 
 	for i, attachmentName := range uploadNames {
