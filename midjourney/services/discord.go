@@ -167,16 +167,31 @@ func Describe(uploadName string) error {
 func ImageBlend(uploadNames []string) error {
 
 	attachments := make([]ReqCommandAttachments, len(uploadNames))
-
+	options := make([]DSCommandOption, len(uploadNames))
+	doptions := make([]DSOption, len(uploadNames))
 	for i, attachmentName := range uploadNames {
-		fmt.Printf("ImageBlend %s: ", attachmentName)
+
 		attachment := ReqCommandAttachments{
 			Id:             strconv.Itoa(i),
 			Filename:       filepath.Base(attachmentName),
 			UploadFilename: attachmentName,
 		}
 		attachments[i] = attachment
-		//fmt.Println("ImageBlend attachments[i]: ", attachmentName)
+		option := DSCommandOption{
+			Type:        11,
+			Name:        "image" + strconv.Itoa(i),
+			Description: "The image to describe",
+			Required:    true,
+		}
+		options[i] = option
+
+		doption := DSOption{
+			Type:  11,
+			Name:  "image" + strconv.Itoa(i),
+			Value: 0,
+		}
+		doptions[i] = doption
+
 	}
 	requestBody := ReqTriggerDiscord{
 		Type:          2,
@@ -189,7 +204,7 @@ func ImageBlend(uploadNames []string) error {
 			Id:      "1062880104792997970",
 			Name:    "blend",
 			Type:    1,
-			Options: []DSOption{},
+			Options: doptions,
 			ApplicationCommand: DSApplicationCommand{
 				Id:                       "1062880104792997970",
 				ApplicationId:            "936929561302675456",
@@ -199,9 +214,9 @@ func ImageBlend(uploadNames []string) error {
 				Type:                     1,
 				Nsfw:                     false,
 				Name:                     "blend",
-				Description:              "blend serval images into your image.",
+				Description:              "",
 				DmPermission:             true,
-				Options:                  []DSCommandOption{},
+				Options:                  options,
 			},
 			Attachments: attachments,
 		},
