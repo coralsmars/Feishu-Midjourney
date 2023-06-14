@@ -175,7 +175,7 @@ func ImageBlend(uploadNames []string) error {
 			UploadFilename: attachmentName,
 		}
 		attachments[i] = attachment
-		fmt.Println("ImageBlend attachments[i]: ", string(attachment))
+		fmt.Println("ImageBlend attachments[i]: ", string(attachmentName))
 	}
 	requestBody := ReqTriggerDiscord{
 		Type:          2,
