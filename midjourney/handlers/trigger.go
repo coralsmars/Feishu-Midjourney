@@ -39,6 +39,7 @@ func MidjourneyBot(c *gin.Context) {
 		err = ImageDescribe(body.Prompt)
 
 	case "blend":
+		fmt.Printf("body.Prompt%s", body.Prompt)
 		strNameList := strings.Split(body.Prompt, ";")
 		err = ImageBlend(strNameList)
 	default:

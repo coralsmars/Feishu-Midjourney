@@ -176,7 +176,7 @@ func ImageBlend(uploadNames []string) error {
 			UploadFilename: attachmentName,
 		}
 		attachments[i] = attachment
-		fmt.Println("ImageBlend attachments[i]: ", attachmentName)
+		//fmt.Println("ImageBlend attachments[i]: ", attachmentName)
 	}
 	requestBody := ReqTriggerDiscord{
 		Type:          2,
@@ -230,6 +230,7 @@ func request(params interface{}, url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	fmt.Printf("%s", string(requestData))
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(requestData))
 	if err != nil {
 		return nil, err
