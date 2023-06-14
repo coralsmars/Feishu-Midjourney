@@ -165,7 +165,7 @@ func Describe(uploadName string) error {
 }
 
 func ImageBlend(uploadNames []string) error {
-	fmt.Println("ImageBlend uploadNames: ", string(uploadNames))
+
 	attachments := make([]ReqCommandAttachments, len(uploadNames))
 
 	for i, attachmentName := range uploadNames {
@@ -175,6 +175,7 @@ func ImageBlend(uploadNames []string) error {
 			UploadFilename: attachmentName,
 		}
 		attachments[i] = attachment
+		fmt.Println("ImageBlend attachments[i]: ", string(attachment))
 	}
 	requestBody := ReqTriggerDiscord{
 		Type:          2,
