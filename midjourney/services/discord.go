@@ -169,13 +169,14 @@ func ImageBlend(uploadNames []string) error {
 	attachments := make([]ReqCommandAttachments, len(uploadNames))
 
 	for i, attachmentName := range uploadNames {
+		fmt.Printf("ImageBlend %s: ", attachmentName)
 		attachment := ReqCommandAttachments{
 			Id:             strconv.Itoa(i),
 			Filename:       filepath.Base(attachmentName),
 			UploadFilename: attachmentName,
 		}
 		attachments[i] = attachment
-		fmt.Println("ImageBlend attachments[i]: ", string(attachmentName))
+		fmt.Println("ImageBlend attachments[i]: ", attachmentName)
 	}
 	requestBody := ReqTriggerDiscord{
 		Type:          2,
