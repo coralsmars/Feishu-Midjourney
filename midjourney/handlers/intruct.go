@@ -33,3 +33,8 @@ func ImageDescribe(uploadName string) error {
 	err := services.Describe(uploadName)
 	return err
 }
+
+func ImageBlend(uploadNames []string) error {
+	err := services.ImageBlend(uploadNames)
+	return err
+}

@@ -8,6 +8,7 @@ import (
 	config "midjourney/initialization"
 	"net/http"
 	"path/filepath"
+	"strconv"
 )
 
 const (
@@ -157,6 +158,50 @@ func Describe(uploadName string) error {
 				Filename:       filepath.Base(uploadName),
 				UploadFilename: uploadName,
 			}},
+		},
+	}
+	_, err := request(requestBody, url)
+	return err
+}
+
+func ImageBlend(uploadNames []string) error {
+
+	attachments := make([]ReqCommandAttachments, len(uploadNames))
+
+	for i, attachmentName := range uploadNames {
+		attachment := ReqCommandAttachments{
+			Id:             strconv.Itoa(i),
+			Filename:       filepath.Base(attachmentName),
+			UploadFilename: attachmentName,
+		}
+		attachments[i] = attachment
+	}
+	requestBody := ReqTriggerDiscord{
+		Type:          2,
+		GuildID:       config.GetConfig().DISCORD_SERVER_ID,
+		ChannelID:     config.GetConfig().DISCORD_CHANNEL_ID,
+		ApplicationId: "936929561302675456",
+		SessionId:     "01084264c36a065ee17f67905e1fba4b",
+		Data: DSCommand{
+			Version: "1067631020041580584",
+			Id:      "1062880104792997970",
+			Name:    "blend",
+			Type:    1,
+			Options: []DSOption{},
+			ApplicationCommand: DSApplicationCommand{
+				Id:                       "1062880104792997970",
+				ApplicationId:            "936929561302675456",
+				Version:                  "1067631020041580584",
+				DefaultPermission:        true,
+				DefaultMemberPermissions: nil,
+				Type:                     1,
+				Nsfw:                     false,
+				Name:                     "blend",
+				Description:              "blend serval images into your image.",
+				DmPermission:             true,
+				Options:                  []DSCommandOption{},
+			},
+			Attachments: attachments,
 		},
 	}
 	_, err := request(requestBody, url)

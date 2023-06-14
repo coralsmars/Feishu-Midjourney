@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -36,6 +37,10 @@ func MidjourneyBot(c *gin.Context) {
 		err = ImageReset(body.DiscordMsgId, body.MsgHash)
 	case "describe":
 		err = ImageDescribe(body.Prompt)
+
+	case "blend":
+		strNameList := strings.Split(body.Prompt, ";")
+		err = ImageBlend(strNameList)
 	default:
 		err = errors.New("invalid type")
 	}
