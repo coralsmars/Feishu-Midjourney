@@ -179,15 +179,15 @@ func ImageBlend(uploadNames []string) error {
 		attachments[i] = attachment
 		option := DSCommandOption{
 			Type:        11,
-			Name:        "image" + strconv.Itoa(i),
+			Name:        "image" + strconv.Itoa(i+1),
 			Description: "The image to describe",
 			Required:    true,
 		}
 		options[i] = option
 		doption := DSOption{
 			Type:  11,
-			Name:  "image" + strconv.Itoa(i),
-			Value: 0,
+			Name:  "image" + strconv.Itoa(i+1),
+			Value: i,
 		}
 		doptions[i] = doption
 
