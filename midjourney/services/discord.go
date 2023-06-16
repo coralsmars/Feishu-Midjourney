@@ -31,17 +31,16 @@ func GenerateImage(prompt string) error {
 			Type:    1,
 			Options: []DSOption{{Type: 3, Name: "prompt", Value: prompt}},
 			ApplicationCommand: DSApplicationCommand{
-				Id:                       "938956540159881230",
-				ApplicationId:            "936929561302675456",
-				Version:                  "1118961510123847772",
-				DefaultPermission:        true,
-				DefaultMemberPermissions: nil,
-				Type:                     1,
-				Nsfw:                     false,
-				Name:                     "imagine",
-				Description:              "Lucky you!",
-				DmPermission:             true,
-				Options:                  []DSCommandOption{{Type: 3, Name: "prompt", Description: "The prompt to imagine", Required: true}},
+				Id:            "938956540159881230",
+				ApplicationId: "936929561302675456",
+				Version:       "1118961510123847772",
+
+				Type: 1,
+
+				Name:        "imagine",
+				Description: "Lucky you!",
+
+				Options: []DSCommandOption{{Type: 3, Name: "prompt", Description: "The prompt to imagine", Required: true}},
 			},
 			Attachments: []ReqCommandAttachments{},
 		},
