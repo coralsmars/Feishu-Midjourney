@@ -32,8 +32,8 @@ type IDiscordLarkMap struct {
 }
 
 const (
-	DiscordPrefix   = "<<<!"
-	DiscordNextFix  = "!>>>"
+	DiscordPrefix   = "<<<!!"
+	DiscordNextFix  = "!!>>>"
 	DiscordQueueKey = "**_discord_queue_**"
 	DiscordLockKey  = "**_discord_lock_**"
 )
@@ -62,7 +62,7 @@ func DiscordHandler(c *gin.Context) {
 	}
 
 	if params.Type == FirstTrigger {
-		re := regexp.MustCompile(`<<<!([^!]+)!>>>`)
+		re := regexp.MustCompile(`<<<!!([^!]+)!!>>>`)
 		match := re.FindStringSubmatch(params.Content)
 		if len(match) > 0 {
 			id := match[1]
