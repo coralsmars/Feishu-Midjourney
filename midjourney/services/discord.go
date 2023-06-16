@@ -23,9 +23,9 @@ func GenerateImage(prompt string) error {
 		GuildID:       config.GetConfig().DISCORD_SERVER_ID,
 		ChannelID:     config.GetConfig().DISCORD_CHANNEL_ID,
 		ApplicationId: appId,
-		SessionId:     "cb06f61453064c0983f2adae2a88c223",
+		SessionId:     "9c4055428e13bcbf2248a6b36084c5f3",
 		Data: DSCommand{
-			Version: "1077969938624553050",
+			Version: "1118961510123847772",
 			Id:      "938956540159881230",
 			Name:    "imagine",
 			Type:    1,
@@ -33,7 +33,7 @@ func GenerateImage(prompt string) error {
 			ApplicationCommand: DSApplicationCommand{
 				Id:                       "938956540159881230",
 				ApplicationId:            "936929561302675456",
-				Version:                  "1077969938624553050",
+				Version:                  "1118961510123847772",
 				DefaultPermission:        true,
 				DefaultMemberPermissions: nil,
 				Type:                     1,
@@ -244,7 +244,7 @@ func request(params interface{}, url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	//fmt.Printf("%s", string(requestData))
+	fmt.Printf("%s", string(requestData))
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(requestData))
 	if err != nil {
 		return nil, err
@@ -259,6 +259,6 @@ func request(params interface{}, url string) ([]byte, error) {
 
 	defer response.Body.Close()
 	bod, respErr := ioutil.ReadAll(response.Body)
-	//fmt.Println("response ", string(bod), response.Status, respErr)
+	fmt.Println("response ", string(bod), response.Status, respErr)
 	return bod, respErr
 }
